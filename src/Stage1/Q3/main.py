@@ -1,9 +1,3 @@
-def float_change(value, default=0.0):
-    try:
-        return float(value)
-    except ValueError:
-        return default
-
 def read_csv(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
@@ -15,22 +9,18 @@ def read_csv(file_path):
             parts = line.strip().split(',')
             if len(parts) == 5:
                 substance = parts[0]
-                weight = float_change(parts[1])
-                specific_gravity = float_change(parts[2])
-                strength = float_change(parts[3])
-                flammability = float_change(parts[4])
+                weight = parts[1]
+                specific_gravity = parts[2]
+                strength = parts[3]
+                flammability = float(parts[4])
 
                 inventory_list.append((substance, weight, specific_gravity, strength, flammability))
 
         return header, inventory_list
     except FileNotFoundError:
-        print(f'\n오류: {file_path} 파일을 찾을 수 없습니다.')
         return None, None
     except Exception as e:
-        print(f'\n오류 발생: {e}')
         return None, None
-
-
 def sort_flammability(inventory_list):
     return sorted(inventory_list, key=lambda x: x[4], reverse=True)
 
