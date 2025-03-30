@@ -24,7 +24,7 @@ class DummySensor:
     def get_env(self):
         now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         log_line = (
-            f"Timestamp: {now}\n"
+            f"현재 시간: {now}\n"
             f"  화성 기지 내부 온도: {self.env_values['mars_base_internal_temperature']}°C\n"
             f"  화성 기지 외부 온도: {self.env_values['mars_base_external_temperature']}°C\n"
             f"  화성 기지 내부 습도: {self.env_values['mars_base_internal_humidity']}%\n"
