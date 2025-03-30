@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4de9b6b7-401e-48dc-b9ce-4ef1aa4e9a06" name="변경" comment="필수단계1[문제3]수정">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="4de9b6b7-401e-48dc-b9ce-4ef1aa4e9a06" name="변경" comment="필수단계1[문제6]" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,10 +49,14 @@
     "Python.mars_mission_computer.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true"
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "E:/PythonProject/pythonProject/.idea"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\PythonProject\pythonProject\.idea" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\PythonProject\pythonProject\src\Stage1\Q3" />
       <recent name="E:\PythonProject\pythonProject\src\Stage1\Q1" />
@@ -149,7 +151,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742806044517</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="필수단계1[문제6]">
+      <option name="closed" value="true" />
+      <created>1743338720935</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1743338720935</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -160,6 +170,7 @@
     <MESSAGE value="필수단계1[문제1]" />
     <MESSAGE value="필수단계1[문제3]" />
     <MESSAGE value="필수단계1[문제3]수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="필수단계1[문제3]수정" />
+    <MESSAGE value="필수단계1[문제6]" />
+    <option name="LAST_COMMIT_MESSAGE" value="필수단계1[문제6]" />
   </component>
 </project>
