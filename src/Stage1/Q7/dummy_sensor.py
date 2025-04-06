@@ -21,7 +21,6 @@ class DummySensor:
         self.env_values['mars_base_internal_oxygen'] = round(random.uniform(4, 7), 2)
 
     def get_env(self):
-        # time 모듈을 사용하여 현재 시간 가져오기 (YYYY-MM-DD HH:MM:SS 형식)
         now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         log_line = (
             f"현재 시간: {now}\n"
