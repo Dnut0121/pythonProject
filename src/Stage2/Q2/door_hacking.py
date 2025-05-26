@@ -63,7 +63,7 @@ def main():
                 print("종료")
                 break
             if not choice.isdigit() or not (1 <= int(choice) <= 25):
-                print("1에서 25 사이의 숫자를 입력해주세요.")
+                print("1에서 25 사이의 숫자를 입력해주세요")
                 continue
 
             shift = int(choice)
