@@ -59,7 +59,6 @@ def input_date(prompt):
         except ValueError:
             print('날짜 형식이 올바르지 않습니다. (예: 20240531)')
 def list_audio_files(records_dir):
-    # records 폴더에 있는 .wav 파일 목록 리턴
     return [f for f in os.listdir(records_dir) if f.lower().endswith('.wav')]
 
 def stt_file_to_csv(records_dir, filename):
@@ -67,14 +66,11 @@ def stt_file_to_csv(records_dir, filename):
     csv_name = os.path.splitext(filename)[0] + '.csv'
     csv_path = os.path.join(records_dir, csv_name)
     recognizer = sr.Recognizer()
-    # 음성 파일을 읽어서 STT
     with sr.AudioFile(wav_path) as source:
         audio = recognizer.record(source)
         try:
-            # STT 수행 (Google API, 한글/영어 자동 인식)
             text = recognizer.recognize_google(audio, language='ko-KR')
             print('인식 결과:', text)
-            # 단순히 전체 텍스트를 0초부터 나온 걸로 저장 (시간 정보 세분화 없이)
             with open(csv_path, 'w', encoding='utf-8', newline='') as f:
                 writer = csv.writer(f)
                 writer.writerow(['시간', '인식된 텍스트'])
@@ -86,7 +82,6 @@ def stt_file_to_csv(records_dir, filename):
             print('STT 요청에 실패했습니다:', e)
 
 def stt_batch_all_files(records_dir):
-    # records 폴더 내의 모든 wav 파일을 STT → CSV로 변환
     audio_files = list_audio_files(records_dir)
     if not audio_files:
         print('음성 파일이 없습니다.')
@@ -109,7 +104,6 @@ def search_keyword_in_csv(records_dir, keyword):
     if not found:
         print('해당 키워드를 포함한 텍스트가 없습니다.')
 
-# 메인 메뉴에 아래 항목을 추가하세요
 def main():
     records_dir = create_records_folder()
     while True:
