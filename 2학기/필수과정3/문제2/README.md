@@ -28,4 +28,5 @@ client_gui3.py      #클라이언트3
 
 ## 실행 이미지
 
+<img width="1255" height="667" alt="image" src="https://github.com/user-attachments/assets/a67acdfa-6721-4b4f-8bdf-8895e4b65c7d" />
 
