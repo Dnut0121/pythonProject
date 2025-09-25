@@ -30,12 +30,10 @@ http://localhost:8080/
 
 ## 동작 개요
 
-* **리슨 포트**: `8080` (`HOST = '0.0.0.0'`)
+* **접속 포트**: `8080` (`HOST = '0.0.0.0'`)
 * **라우팅**
 
-  * `GET /` 또는 `GET /index.html` → `index.html` 반환 (**200 OK**)
-  * 그 외 경로 → **404**
-* **HEAD**: 헤더만 전송
+  * `GET /` 또는 `GET /index.html` → `index.html` 반환
 * **서버 로그(매 요청)**
   접속 시간 · 클라이언트 IP · IP 유형(로컬호스트/사설/공용) · 공용 IP일 경우 **국가/지역/도시/좌표/기관/ASN/시간대**
 
@@ -47,9 +45,8 @@ http://localhost:8080/
 
 ---
 
-## 요청/응답 예시
-
-
+## 웹페이지
+<img width="756" height="911" alt="image" src="https://github.com/user-attachments/assets/95f75329-a7bb-4161-8b58-51873d02d94d" />
 
 ## 외부 API(지오로케이션)
 
