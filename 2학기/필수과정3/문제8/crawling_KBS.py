@@ -1,9 +1,3 @@
-# crawling_KBS.py
-# 목적: 네이버 로그인 전/후 비교, 로그인 후 메일 제목 수집
-# 준비: pip install selenium webdriver-manager python-dotenv
-# .env: NAVER_ID=아이디, NAVER_PW=비밀번호
-# 창 유지: Windows -> set KEEP_OPEN=1, mac/Linux -> export KEEP_OPEN=1
-
 import os, sys, time
 from typing import List
 from dotenv import load_dotenv
