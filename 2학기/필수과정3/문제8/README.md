@@ -103,5 +103,3 @@ Windows `set KEEP_OPEN=1` / macOS·Linux `export KEEP_OPEN=1`
 * 3. PC 메일 제목 수집.
 * 4. 비로그인·로그인 결과를 하나의 객체로 최종 출력.
 * `KEEP_OPEN` 미설정 시 종료 시 드라이버 정리.
-
----
