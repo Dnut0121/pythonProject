@@ -58,11 +58,11 @@ python sendmail.py
 
 ## 사용 방법
 
-1. 창 상단 **From**: .env의 GMAIL_USER가 표시됨(수정 불가).
-2. **To**: 수신자 이메일 입력. 여러 명은 `,`로 구분.
-3. **Subject**: 제목 입력.
-4. **Body**: 본문 입력.
-5. **Attachments**:
+1. 창 상단 **발송자**: .env의 GMAIL_USER가 표시됨(수정 불가).
+2. **수신자**: 수신자 이메일 입력. 여러 명은 `,`로 구분.
+3. **제목**: 제목 입력.
+4. **내용**: 본문 입력.
+5. **첨부파일**:
 
    * `추가`: 파일 선택
    * `제거`: 선택 항목 삭제
@@ -80,7 +80,7 @@ python sendmail.py
 * SMTP 옵션: SSL 체크, Port 표시
 * 하단: Send 버튼, Log 뷰어
 
-![img.png](img.png)
+![img.png](%EC%9D%B4%EB%AF%B8%EC%A7%80/img.png)
 ---
 
 ## 예외 및 해결
