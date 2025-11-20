@@ -1,20 +1,27 @@
-# models.py
 from datetime import datetime
-from typing import Optional
-from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import String, Integer, Text, DateTime
+from sqlalchemy import Integer, String, Text, DateTime, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from database import Base
 
-class Todo(Base):
-    __tablename__ = "todo"
+class Question(Base):
+    __tablename__ = "question"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
-    title: Mapped[Optional[str]] = mapped_column(String(255))
-    assignee: Mapped[Optional[str]] = mapped_column(String(100))
-    due: Mapped[Optional[str]] = mapped_column(String(10))     # 'YYYY-MM-DD'
-    priority: Mapped[Optional[str]] = mapped_column(String(5)) # P1|P2|P3
-    status: Mapped[Optional[str]] = mapped_column(String(10))  # todo|doing|done
-    notes: Mapped[Optional[str]] = mapped_column(Text)
+    subject: Mapped[str] = mapped_column(String(200), nullable=False)
+    content: Mapped[str] = mapped_column(Text, nullable=False)
+    create_date: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=datetime.utcnow)
 
-    create_date: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
-    update_date: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+    # (선택) 답변 관계
+    answers: Mapped[list["Answer"]] = relationship(
+        "Answer", back_populates="question", cascade="all, delete-orphan"
+    )
+
+class Answer(Base):
+    __tablename__ = "answer"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    content: Mapped[str] = mapped_column(Text, nullable=False)
+    create_date: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=datetime.utcnow)
+
+    question_id: Mapped[int] = mapped_column(ForeignKey("question.id", ondelete="CASCADE"), nullable=False)
+    question: Mapped[Question] = relationship("Question", back_populates="answers")

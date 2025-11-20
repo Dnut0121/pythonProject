@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4de9b6b7-401e-48dc-b9ce-4ef1aa4e9a06" name="변경" comment="fix : 필수과정3[문제8]">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="4de9b6b7-401e-48dc-b9ce-4ef1aa4e9a06" name="변경" comment="feat : 필수과정4[문제5] DB저장확인">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -16,6 +15,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="Python Script" />
       </list>
     </option>
@@ -48,6 +48,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.app.executor": "Run",
     "Python.calculator.executor": "Run",
     "Python.client_gui.executor": "Run",
     "Python.client_gui2.executor": "Run",
@@ -62,13 +64,16 @@
     "Python.sendmail.executor": "Run",
     "Python.server.executor": "Run",
     "Python.tf_zip_cracker.executor": "Run",
+    "Python.todo.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "E:/PythonProject/pythonProject/src/Stage2/Q8",
+    "last_opened_file_path": "E:/PythonProject/pythonProject/2학기/필수과정4/문제5",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -81,16 +86,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\PythonProject\pythonProject\src\Stage2\Q8" />
-      <recent name="E:\PythonProject\pythonProject\src\Stage2\Q2" />
-      <recent name="E:\PythonProject\pythonProject\.idea" />
+      <recent name="E:\PythonProject\pythonProject\2학기\필수과정4\문제5" />
+      <recent name="E:\PythonProject\pythonProject\2학기\필수과정4\문제3" />
+      <recent name="E:\PythonProject\pythonProject\2학기\필수과정4\문제1\image" />
+      <recent name="E:\PythonProject\pythonProject\2학기\필수과정3\문제2 감동의메시지" />
+      <recent name="E:\PythonProject\pythonProject\2학기\필수과정3" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\PythonProject\pythonProject\2학기\필수과정3\문제1\이미지" />
       <recent name="E:\PythonProject\pythonProject\src\Stage3\Q5" />
       <recent name="E:\PythonProject\pythonProject\src\Stage2\Q1" />
       <recent name="E:\PythonProject\pythonProject\src\Stage1\Q3" />
       <recent name="E:\PythonProject\pythonProject\src\Stage1\Q1" />
-      <recent name="E:\PythonProject\pythonProject\src\Stage1" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -118,7 +125,17 @@
       <workItem from="1759340048541" duration="2103000" />
       <workItem from="1759391093955" duration="2504000" />
       <workItem from="1759897169581" duration="134000" />
-      <workItem from="1760594325120" duration="2721000" />
+      <workItem from="1760594325120" duration="3855000" />
+      <workItem from="1760603458902" duration="242000" />
+      <workItem from="1760661784084" duration="7000" />
+      <workItem from="1761163746531" duration="2216000" />
+      <workItem from="1761210167861" duration="331000" />
+      <workItem from="1761281803767" duration="1199000" />
+      <workItem from="1762414963963" duration="1470000" />
+      <workItem from="1762762929295" duration="66000" />
+      <workItem from="1762966841409" duration="3158000" />
+      <workItem from="1762971127486" duration="15000" />
+      <workItem from="1763630765762" duration="551000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <option name="closed" value="true" />
@@ -360,7 +377,55 @@
       <option name="project" value="LOCAL" />
       <updated>1759393756408</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="필수과정3[문제1]">
+      <option name="closed" value="true" />
+      <created>1760597264944</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1760597264944</updated>
+    </task>
+    <task id="LOCAL-00032" summary="fix : 필수과정3[문제1]">
+      <option name="closed" value="true" />
+      <created>1760603537128</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1760603537128</updated>
+    </task>
+    <task id="LOCAL-00033" summary="feat : 필수과정3[문제2 감동의메세지]">
+      <option name="closed" value="true" />
+      <created>1761165964992</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1761165964992</updated>
+    </task>
+    <task id="LOCAL-00034" summary="feat : 필수과정4[문제1]">
+      <option name="closed" value="true" />
+      <created>1762416214711</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1762416214711</updated>
+    </task>
+    <task id="LOCAL-00035" summary="feat : 필수과정4[문제3]">
+      <option name="closed" value="true" />
+      <created>1762970838936</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1762970838936</updated>
+    </task>
+    <task id="LOCAL-00036" summary="feat : 필수과정4[문제5] DB저장확인">
+      <option name="closed" value="true" />
+      <created>1763631250850</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1763631250850</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -381,7 +446,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test" />
     <MESSAGE value="필수단계1[문제1]" />
     <MESSAGE value="필수단계1[문제3]" />
     <MESSAGE value="필수단계1[문제3]수정" />
@@ -401,11 +465,19 @@
     <MESSAGE value="필수과정3[문제4]" />
     <MESSAGE value="필수과정3[문제7]" />
     <MESSAGE value="fix : 필수과정3[문제8]" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : 필수과정3[문제8]" />
+    <MESSAGE value="필수과정3[문제1]" />
+    <MESSAGE value="fix : 필수과정3[문제1]" />
+    <MESSAGE value="feat : 필수과정3[문제2 감동의메세지]" />
+    <MESSAGE value="feat : 필수과정4[문제1]" />
+    <MESSAGE value="feat : 필수과정4[문제3]" />
+    <MESSAGE value="feat : 필수과정4[문제5] DB저장확인" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : 필수과정4[문제5] DB저장확인" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/pythonProject$sendmail.coverage" NAME="sendmail 커버리지 결과" MODIFIED="1760597047748" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/2학기/필수과정3/문제1" />
+    <SUITE FILE_PATH="coverage/pythonProject$sendmail.coverage" NAME="sendmail 커버리지 결과" MODIFIED="1761210479287" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/2학기/필수과정3/문제2 감동의메시지" />
+    <SUITE FILE_PATH="coverage/pythonProject$app.coverage" NAME="app 커버리지 결과" MODIFIED="1763631209537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/2학기/필수과정4/문제5" />
     <SUITE FILE_PATH="coverage/pythonProject$crawling_KBS.coverage" NAME="crawling_KBS 커버리지 결과" MODIFIED="1759393431343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/2학기/필수과정3/문제8" />
+    <SUITE FILE_PATH="coverage/pythonProject$todo.coverage" NAME="todo 커버리지 결과" MODIFIED="1762415363928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/2학기/필수과정4/문제1" />
     <SUITE FILE_PATH="coverage/pythonProject$crawling_KBS_api.coverage" NAME="crawling_KBS_api 커버리지 결과" MODIFIED="1758790504221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/2학기/필수과정3/문제7" />
     <SUITE FILE_PATH="coverage/pythonProject$server.coverage" NAME="server 커버리지 결과" MODIFIED="1758130010876" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/2학기/필수과정3/문제4" />
   </component>
