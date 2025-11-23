@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>질문 게시판</title>
+<style>
+  :root{--bg:#0b1220;--panel:#111a2b;--muted:#2e3a55;--text:#e8eefc;--accent:#7aa2ff}
+  html,body{height:100%}
+  body{margin:0;background:linear-gradient(120deg,#0b1220,#0e1830);color:var(--text);font:14px/1.4 system-ui,Segoe UI,Apple SD Gothic Neo,Malgun Gothic,sans-serif}
+  .wrap{max-width:880px;margin:24px auto;padding:0 16px}
+  .card{background:var(--panel);border:1px solid #1b2843;border-radius:14px;padding:14px}
+  h1{margin:0 0 10px}
+  label{display:block;font-size:12px;color:#a9b6d9;margin:8px 2px 6px}
+  input,textarea{width:100%;box-sizing:border-box;background:#0f1730;color:var(--text);border:1px solid var(--muted);border-radius:10px;padding:10px}
+  textarea{min-height:110px;resize:vertical}
+  .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
+  button{border:0;border-radius:12px;padding:10px 14px;cursor:pointer;background:var(--accent);color:#fff;font-weight:600}
+  .ghost{background:#1b2744}
+  .list{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+  .item{background:#0f1730;border:1px solid #1b2843;border-radius:12px;padding:12px}
+  .top{display:flex;justify-content:space-between;gap:8px}
+  .muted{color:#a9b6d9}
+  .bar{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:12px}
+</style>
+<div class="wrap">
+  <div class="bar">
+    <h1>질문 게시판</h1>
+    <div style="display:flex;gap:8px;align-items:center">
+      <input id="q" placeholder="검색(제목/내용)" />
+      <button id="refreshBtn" class="ghost" type="button">새로고침</button>
+    </div>
+  </div>
+
+  <section class="card">
+    <h3 style="margin:0 0 6px">질문 작성</h3>
+    <label>제목 *</label>
+    <input id="subject" placeholder="예: Alembic이 뭐죠?" />
+    <label>내용 *</label>
+    <textarea id="content" placeholder="상세 질문 내용을 입력하세요."></textarea>
+    <div class="actions">
+      <button id="resetBtn" class="ghost" type="button">초기화</button>
+      <button id="createBtn" type="button">등록</button>
+    </div>
+    <div id="msg" class="muted" style="margin-top:6px"></div>
+  </section>
+
+  <section class="card" style="margin-top:14px">
+    <h3 style="margin:0 0 6px">질문 목록</h3>
+    <div id="list" class="list"></div>
+  </section>
+</div>
+
+<script>
+const API_LIST = "/api/question/";     // GET 목록
+const API_CREATE = "/api/question";    // POST 생성 (추가하고 싶을 때 사용)
+
+async function request(url, { method="GET", json } = {}) {
+  const opts = { method, headers:{} };
+  if (json && method !== "GET") {
+    opts.headers["Content-Type"] = "application/json";
+    opts.body = JSON.stringify(json);
+  }
+  const res = await fetch(url, opts);
+  let data = null;
+  try { data = await res.json(); } catch {}
+  if (!res.ok) throw new Error(data?.detail || `HTTP ${res.status}`);
+  return data;
+}
+
+const $ = (id)=>document.getElementById(id);
+const qEl=$("q"), refreshBtn=$("refreshBtn"), subjectEl=$("subject"), contentEl=$("content"), createBtn=$("createBtn"), resetBtn=$("resetBtn"), listEl=$("list"), msg=$("msg");
+
+function itemCard(x){
+  const el = document.createElement("div");
+  el.className = "item";
+  el.innerHTML = `
+    <div class="top">
+      <div><b>#${x.id}</b> ${x.subject}</div>
+      <div class="muted">${new Date(x.create_date).toLocaleString()}</div>
+    </div>
+    <div class="muted" style="margin-top:6px">${x.content}</div>
+  `;
+  return el;
+}
+
+function render(list){
+  const q = (qEl.value||"").toLowerCase();
+  const filtered = list.filter(x =>
+    !q || x.subject.toLowerCase().includes(q) || x.content.toLowerCase().includes(q)
+  );
+  listEl.innerHTML = "";
+  filtered.forEach(x => listEl.appendChild(itemCard(x)));
+}
+
+async function refresh(){
+  try {
+    const data = await request(API_LIST);
+    render(data);
+  } catch(e){
+    listEl.innerHTML = `<div class="muted">목록 실패: ${e.message}</div>`;
+  }
+}
+
+async function onCreate(){
+  msg.textContent = "";
+  const subject = subjectEl.value.trim();
+  const content = contentEl.value.trim();
+  if(!subject || !content){
+    msg.textContent = "제목/내용을 입력하세요.";
+    return;
+  }
+  try{
+    await request(API_CREATE, { method:"POST", json:{ subject, content } });
+    msg.textContent = "등록됨";
+    subjectEl.value = ""; contentEl.value = "";
+    refresh();
+  }catch(e){
+    msg.textContent = "등록 실패: " + e.message;
+  }
+}
+
+createBtn.onclick = onCreate;
+resetBtn.onclick  = ()=>{ subjectEl.value=""; contentEl.value=""; msg.textContent=""; };
+refreshBtn.onclick= refresh;
+qEl.oninput = refresh;
+
+refresh();
+</script>
+</html>
