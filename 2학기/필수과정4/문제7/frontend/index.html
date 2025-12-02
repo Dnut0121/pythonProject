@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>질문 게시판</title>
+  <style>
+    :root{
+      --bg:#0b1220; --panel:#0f1730; --card:#121b33;
+      --border:#1b2843; --muted:#8796b8; --text:#e8eefc;
+      --accent:#7aa2ff; --accent-weak:#2a3f78;
+      --ok:#52d273; --danger:#ff6b6b; --warn:#ffb86b;
+      --shadow: 0 8px 20px rgba(0,0,0,.35);
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--text);
+      background:radial-gradient(1000px 600px at 10% -10%, #11204a 0%, transparent 60%),
+                 radial-gradient(800px 600px at 100% 10%, #0c1640 0%, transparent 55%),
+                 linear-gradient(120deg,#0b1220,#0e1830);
+      font:15px/1.55 system-ui, Segoe UI, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
+    }
+    .wrap{max-width:980px; margin:84px auto 28px; padding:0 18px}
+
+    /* Top bar */
+    .topbar{
+      position:fixed; inset:0 0 auto 0; height:64px;
+      display:flex; align-items:center; justify-content:center;
+      backdrop-filter:saturate(1.2) blur(8px);
+      background:rgba(9,14,28,.55); border-bottom:1px solid var(--border);
+      z-index:10;
+    }
+    .topbar .inner{width:100%; max-width:980px; padding:0 18px; display:flex; gap:12px; align-items:center; justify-content:space-between}
+    .brand{display:flex; align-items:baseline; gap:10px}
+    .brand h1{margin:0; font-size:20px; font-weight:800; letter-spacing:.2px}
+    .brand .count{font-size:12px; color:var(--muted); background:#0e1933; border:1px solid var(--border); border-radius:999px; padding:3px 8px}
+
+    .searchbar{display:flex; gap:8px; align-items:center; min-width:280px}
+    .input, .textarea{
+      width:100%; background:var(--panel); color:var(--text);
+      border:1px solid var(--border); border-radius:12px; padding:10px 12px;
+      outline:none; transition:border-color .15s ease, box-shadow .15s ease;
+    }
+    .input:focus, .textarea:focus{border-color:var(--accent); box-shadow:0 0 0 3px rgba(122,162,255,.15)}
+    .btn{
+      border:0; border-radius:12px; padding:10px 14px; cursor:pointer;
+      background:var(--accent); color:#fff; font-weight:700; letter-spacing:.2px;
+      transition:transform .04s ease, filter .15s ease;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn.ghost{background:var(--accent-weak)}
+    .btn[disabled]{opacity:.6; cursor:not-allowed}
+
+    /* Cards */
+    .grid{display:grid; grid-template-columns:1fr; gap:14px}
+    .card{
+      background:var(--card); border:1px solid var(--border);
+      border-radius:var(--radius); padding:16px; box-shadow:var(--shadow);
+    }
+    .card h3{margin:0 0 8px; font-size:16px}
+    .label{display:block; font-size:12px; color:#a9b6d9; margin:10px 2px 6px}
+    .textarea{min-height:120px; resize:vertical}
+
+    /* List */
+    .list{display:grid; grid-template-columns:1fr; gap:10px}
+    .item{
+      background:var(--panel); border:1px solid var(--border);
+      border-radius:12px; padding:12px;
+      display:grid; gap:8px;
+    }
+    .item .top{display:flex; justify-content:space-between; gap:12px; align-items:center}
+    .item .title{font-weight:800; font-size:15px; line-height:1.35; display:flex; gap:8px; align-items:center}
+    .item .title .id{color:#9db1ff; font-weight:800}
+    .item .meta{color:var(--muted); font-size:12px}
+    .item .content{color:#cfd7ee; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden}
+
+    /* Empty & error */
+    .empty, .error{
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      color:var(--muted); border:1px dashed var(--border); border-radius:12px;
+      padding:18px;
+    }
+
+    /* Toast */
+    .toast{
+      position:fixed; right:18px; bottom:18px; z-index:20;
+      background:#0c1834; border:1px solid var(--border); color:#dbe5ff;
+      border-radius:12px; padding:10px 12px; box-shadow:var(--shadow); opacity:0; transform:translateY(8px);
+      transition:opacity .18s ease, transform .18s ease;
+    }
+    .toast.show{opacity:1; transform:translateY(0)}
+
+    /* Scrollbar (WebKit) */
+    ::-webkit-scrollbar{height:12px;width:12px}
+    ::-webkit-scrollbar-thumb{background:#1b2744;border-radius:10px;border:2px solid #0b1220}
+    @media (min-width:860px){
+      .grid{grid-template-columns: 1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- Topbar -->
+  <div class="topbar" role="navigation" aria-label="상단바">
+    <div class="inner">
+      <div class="brand">
+        <h1>질문 게시판</h1>
+        <span id="count" class="count">총 0건</span>
+      </div>
+      <div class="searchbar" role="search">
+        <input id="q" class="input" placeholder="검색(제목/내용)" aria-label="검색 입력" />
+        <button id="refreshBtn" class="btn ghost" type="button" aria-label="새로고침">새로고침</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section class="grid">
+      <!-- 작성 폼 -->
+      <section class="card" aria-labelledby="write-title">
+        <h3 id="write-title">질문 작성</h3>
+        <label class="label" for="subject">제목 *</label>
+        <input id="subject" class="input" placeholder="예: Alembic이 뭐죠?" />
+        <label class="label" for="content">내용 *</label>
+        <textarea id="content" class="textarea" placeholder="상세 질문 내용을 입력하세요."></textarea>
+        <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:10px">
+          <button id="resetBtn" class="btn ghost" type="button" aria-label="초기화">초기화</button>
+          <button id="createBtn" class="btn" type="button" aria-label="등록">등록</button>
+        </div>
+        <div id="msg" class="label" style="margin-top:8px"></div>
+      </section>
+
+      <!-- 목록 -->
+      <section class="card" aria-labelledby="list-title">
+        <h3 id="list-title">질문 목록</h3>
+        <div id="list" class="list" role="list"></div>
+      </section>
+    </section>
+  </main>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const API_LIST = "/api/question/";   // GET
+    const API_CREATE = "/api/question";  // POST
+
+    const $ = (id)=>document.getElementById(id);
+    const els = {
+      q: $("q"), count: $("count"),
+      subject: $("subject"), content: $("content"),
+      createBtn: $("createBtn"), resetBtn: $("resetBtn"), refreshBtn: $("refreshBtn"),
+      list: $("list"), msg: $("msg"), toast: $("toast")
+    };
+
+    // --- utils ---
+    function showToast(text, type="ok"){
+      els.toast.textContent = text;
+      els.toast.style.borderColor = type==="ok" ? "var(--ok)" : type==="warn" ? "var(--warn)" : "var(--danger)";
+      els.toast.classList.add("show");
+      setTimeout(()=>els.toast.classList.remove("show"), 1800);
+    }
+    const sleep = (ms)=>new Promise(r=>setTimeout(r,ms));
+    function setLoading(b){
+      els.createBtn.disabled = b;
+      els.createBtn.textContent = b ? "등록 중…" : "등록";
+    }
+    function setMsg(text, tone="muted"){
+      els.msg.textContent = text || "";
+      els.msg.style.color = tone==="ok" ? "var(--ok)" : tone==="warn" ? "var(--warn)" : "#a9b6d9";
+    }
+    function sanitize(s){ return (s||"").replace(/[<>&]/g, c=>({ "<":"&lt;","&": "&amp;", ">":"&gt;" }[c])) }
+
+    async function request(url, { method="GET", json } = {}) {
+      const opts = { method, headers:{} };
+      if (json && method !== "GET") { opts.headers["Content-Type"]="application/json"; opts.body=JSON.stringify(json); }
+      const res = await fetch(url, opts);
+      let data = null; try{ data = await res.json(); } catch {}
+      if (!res.ok) throw new Error(data?.detail || `HTTP ${res.status}`);
+      return data;
+    }
+
+    // --- render ---
+    function itemCard(x){
+      const el = document.createElement("div");
+      el.className = "item";
+      el.setAttribute("role", "listitem");
+      el.innerHTML = `
+        <div class="top">
+          <div class="title">
+            <span class="id">#${x.id}</span>
+            <span>${sanitize(x.subject)}</span>
+          </div>
+          <div class="meta">${new Date(x.create_date).toLocaleString()}</div>
+        </div>
+        <div class="content">${sanitize(x.content)}</div>
+      `;
+      return el;
+    }
+    function render(list){
+      const q = (els.q.value||"").toLowerCase();
+      const filtered = list.filter(x =>
+        !q || x.subject.toLowerCase().includes(q) || x.content.toLowerCase().includes(q)
+      );
+      els.list.innerHTML = "";
+      if (!filtered.length){
+        els.list.innerHTML = `<div class="empty">아직 등록된 질문이 없습니다.</div>`;
+      } else {
+        filtered.forEach(x => els.list.appendChild(itemCard(x)));
+      }
+      els.count.textContent = `총 ${list.length}건`;
+    }
+
+    // --- data flow ---
+    let cache = [];
+    async function refresh(){
+      try{
+        els.list.innerHTML = `<div class="empty">불러오는 중…</div>`;
+        const data = await request(API_LIST);
+        cache = data || [];
+        render(cache);
+      }catch(e){
+        els.list.innerHTML = `<div class="error">목록을 불러오지 못했습니다: ${sanitize(e.message)}</div>`;
+      }
+    }
+
+    async function onCreate(){
+      setMsg(""); setLoading(true);
+      const subject = els.subject.value.trim();
+      const content = els.content.value.trim();
+      if(!subject || !content){
+        setMsg("제목/내용을 입력하세요.", "warn"); setLoading(false); return;
+      }
+      try{
+        await request(API_CREATE, { method:"POST", json:{ subject, content } });
+        els.subject.value = ""; els.content.value = "";
+        showToast("등록 완료", "ok");
+        await sleep(120);
+        refresh();
+      }catch(e){
+        setMsg("등록 실패: " + e.message, "danger");
+        showToast("등록 실패", "danger");
+      }finally{
+        setLoading(false);
+      }
+    }
+
+    // --- debounce search ---
+    let timer=null;
+    els.q.addEventListener("input", ()=>{
+      clearTimeout(timer); timer=setTimeout(()=>render(cache), 150);
+    });
+
+    // --- events ---
+    els.createBtn.addEventListener("click", onCreate);
+    els.resetBtn.addEventListener("click", ()=>{ els.subject.value=""; els.content.value=""; setMsg(""); });
+    els.refreshBtn.addEventListener("click", refresh);
+
+    // --- first load ---
+    refresh();
+  </script>
+</body>
+</html>
